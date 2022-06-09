@@ -1,6 +1,6 @@
 import { projects, clients } from "./sampleData.js";
 
-import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
+import { GraphQLEnumType, GraphQLID, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
 import Project from "./models/Project.js";
 import Client from "./models/Client.js";
 
@@ -62,8 +62,112 @@ const RootQuery = new GraphQLObjectType({
     }
 })
 
+const mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addClient: {
+            type: ClientType,
+            args: {
+                name: { type: GraphQLNonNull(GraphQLString) },
+                email: { type: GraphQLNonNull(GraphQLString) },
+                phone: { type: GraphQLNonNull(GraphQLString) },
+            },
+            resolve(parent, args) {
+                const client = new Client({
+                    name: args.name,
+                    phone: args.phone,
+                    email: args.email,
+                });
+
+                return client.save();
+            },
+        },
+        // delete client
+        deleteClient: {
+            type: ClientType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                return Client.findByIdAndRemove(args.id);
+            },
+        },
+        // add a project
+        addProject: {
+            type: ProjectType,
+            args: {
+                name: { type: GraphQLNonNull(GraphQLString) },
+                description: { type: GraphQLNonNull(GraphQLString) },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: "ProjectStatus",
+                        values: {
+                            new: { value: "Not Started" },
+                            progress: { value: "Not Progress" },
+                            completed: { value: "Completed" },
+                        },
+                    }),
+                    defaultValue: "Not Started",
+                },
+                clientId: { type: GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                const project = new Project({
+                    name: args.name,
+                    description: args.description,
+                    status: args.status,
+                    clientId: args.clientId,
+                });
+
+                return project.save();
+            },
+        },
+        // delete project
+        deleteProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                return Project.findByIdAndRemove(args.id);
+            },
+        },
+        // update project
+        updateProject: {
+            type: ProjectType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: "ProjectStatusUpdate",
+                        values: {
+                            new: { value: "Not Started" },
+                            progress: { value: "Not Progress" },
+                            completed: { value: "Completed" },
+                        },
+                    }),
+                    
+                },
+            },
+            resolve(parent, args) {
+                return Project.findByIdAndUpdate(args.id, {
+                    $set: {
+                        name: args.name,
+                        description: args.description,
+                        status: args.status
+                    }
+                },
+                    { new: true }
+                )
+            }
+        },
+    },
+});
+
 const schema = new GraphQLSchema({
-    query:RootQuery
+    query:RootQuery, mutation
 })
 
 export default schema
