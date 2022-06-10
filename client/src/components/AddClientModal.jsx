@@ -29,7 +29,7 @@ const AddClientModal = () => {
         console.log(name, email, phone);
         
         if (name===""||email===""||phone==="") {
-            return message.warning("All the fields are required!")
+            return message.warning("All the fields are required!");
         };
 
         addClient(name, email, phone);
