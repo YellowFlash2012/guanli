@@ -4,7 +4,6 @@ import { GET_CLIENTS } from "../queries/clientQueries";
 import ClientRow from "./ClientRow";
 
 
-
 const Clients = () => {
     const { loading, data, error } = useQuery(GET_CLIENTS);
 

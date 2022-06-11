@@ -1,13 +1,15 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import "antd/dist/antd.css";
-import "./App.css";
-import AddClientModal from "./components/AddClientModal";
-import Clients from "./components/Clients";
+
+
 import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
+
 import Home from "./pages/Home";
 import Project from "./pages/Project";
 import NotFound from "./pages/NotFound";
+
+import "./App.css";
+// import "antd/dist/antd.css";
+import 'antd/dist/antd.min.css'
 
 function App() {
     return (

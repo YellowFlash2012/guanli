@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 const ProjectCard = ({ project }) => {
     
     return <div className="col-md-4">

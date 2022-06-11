@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation} from "@apollo/client";
 import { message } from "antd";
 import { useState } from "react";
 import {FaUser} from "react-icons/fa"

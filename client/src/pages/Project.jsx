@@ -3,6 +3,7 @@ import { message, Spin } from "antd";
 import { FaEnvelope, FaIdBadge, FaPhone } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import DeleteProjectButton from "../components/DeleteProjectButton";
+import EditProjectForm from "../components/EditProjectForm";
 import { GET_PROJECT } from "../queries/projectQueries";
 
 const Project = () => {
@@ -29,6 +30,8 @@ const Project = () => {
             
             <h5 className="mt-3">Project Status</h5>
             <p className="lead">{data.project.status}</p>
+
+            <EditProjectForm project={data.project} />
 
             <DeleteProjectButton id={data.project.id} />
             
