@@ -4,6 +4,7 @@ import helmet from "helmet"
 import { graphqlHTTP } from "express-graphql"
 import colors from "colors"
 import cors from "cors"
+import path from "path"
 
 
 import schema from "./server/schema.js"
@@ -27,9 +28,9 @@ app.use("/graphql", graphqlHTTP({
     graphiql: process.env.NODE_ENV === "development"
 }));
 
-app.get("/", (req, res) => {
-    res.send("Guanli is live!")
-})
+// app.get("/", (req, res) => {
+//     res.send("Guanli is live!")
+// })
 
 const __dirname = path.resolve();
 
