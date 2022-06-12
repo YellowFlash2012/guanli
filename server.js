@@ -14,7 +14,7 @@ import connectDB from "./server/config/db.js";
 config()
 
 const app = express();
-const port = process.env.port || 5000
+const PORT = process.env.PORT || 5000
 
 app.use(
     helmet({
@@ -48,6 +48,6 @@ app.use("/graphql", graphqlHTTP({
 }));
 
 connectDB()
-app.listen(port, () => {
-    console.log(`Server on | Port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server on | Port ${PORT}`);
 })
