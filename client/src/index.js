@@ -7,6 +7,7 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import API from './utils';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -31,7 +32,7 @@ const cache = new InMemoryCache({
 })
 
 const client = new ApolloClient({
-    uri: "http://localhost:5000/graphql",
+    uri: API,
     cache,
     connectToDevTools: true,
 });
