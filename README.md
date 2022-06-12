@@ -1,6 +1,8 @@
 # guanli
 <a href="https://guanli-app.herokuapp.com/">Live preview</a>
+
 A project management web-app powered by that enables freelancers to track the projects they are working on.
+
 Source: <a href="https://www.youtube.com/watch?v=BcLNfwF04Kw">this</a> fantastic crash course
 # Tech stack:
 front end: react + apolloclient
